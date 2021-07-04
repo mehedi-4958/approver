@@ -1,9 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -49,13 +52,17 @@ class SplashScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              Text(
-                'A process might have lots of components to approve from proper authority, this app made it easy in the fingertip...',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal),
+              Container(
+                padding: EdgeInsets.only(
+                    left: 40.0, top: 0.0, right: 40.0, bottom: 0.0),
+                child: Text(
+                  'A process might have lots of components to approve from proper authority, this app made it easy in the fingertip...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal),
+                ),
               )
             ],
           )),
