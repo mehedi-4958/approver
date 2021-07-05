@@ -38,8 +38,8 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            height: 120,
-                            width: 120,
+                            height: 123,
+                            width: 123,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.blue,
@@ -64,6 +64,136 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(
                       height: 20.0,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 150.0,
+              ),
+              Container(
+                height: 50.0,
+                width: 300.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.blue.shade100,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(45),
+                          bottomLeft: Radius.circular(45),
+                        ),
+                      ),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Username',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Container(
+                      width: 194,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(45),
+                          bottomRight: Radius.circular(45),
+                        ),
+                      ),
+                      child: TextFormField(
+                        showCursor: false,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 50.0,
+                width: 300.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.blue.shade100,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(45),
+                          bottomLeft: Radius.circular(45),
+                        ),
+                      ),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Username',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Container(
+                      width: 194,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(45),
+                          bottomRight: Radius.circular(45),
+                        ),
+                      ),
+                      child: TextFormField(
+                        autofocus: true,
+                        showCursor: false,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      ),
                     ),
                   ],
                 ),
