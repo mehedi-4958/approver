@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         } else {
           // Loading is done, return the app:
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: LoginPage(),
           );
         }
