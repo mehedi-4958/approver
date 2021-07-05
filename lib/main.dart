@@ -1,3 +1,4 @@
+import 'package:approver/screens/login_screen.dart';
 import 'package:approver/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         } else {
           // Loading is done, return the app:
           return MaterialApp(
-            home: Scaffold(body: Center(child: Text('App loaded'))),
+            home: LoginPage(),
           );
         }
       },
