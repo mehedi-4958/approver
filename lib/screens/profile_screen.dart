@@ -48,11 +48,190 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.blue[100], fixedSize: Size(200, 30)),
                       onPressed: () {
-                        // showDialog(
-                        //     context: context,
-                        //     builder: (BuildContext context) {
-                        //       return AlertDialog();
-                        //     });
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Center(
+                                  child: Text(
+                                    'Change Password',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                content: Container(
+                                  height: 250,
+                                  child: Form(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Old Password',
+                                              style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontStyle: FontStyle.italic,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              '*',
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Container(
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'New Password',
+                                              style: TextStyle(
+                                                color: Colors.blue,
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              '*',
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Container(
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Re-enter New Password',
+                                              style: TextStyle(
+                                                color: Colors.blue,
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              '*',
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Container(
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 30),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                height: 35,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.blue,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft: Radius.circular(5),
+                                                    topRight:
+                                                        Radius.circular(5),
+                                                    bottomRight:
+                                                        Radius.circular(5),
+                                                    bottomLeft:
+                                                        Radius.circular(5),
+                                                  ),
+                                                ),
+                                                child: TextButton(
+                                                  child: Text(
+                                                    'Save',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 20),
+                                            Expanded(
+                                              child: Container(
+                                                height: 35,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.blue,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft: Radius.circular(5),
+                                                    topRight:
+                                                        Radius.circular(5),
+                                                    bottomRight:
+                                                        Radius.circular(5),
+                                                    bottomLeft:
+                                                        Radius.circular(5),
+                                                  ),
+                                                ),
+                                                child: TextButton(
+                                                  child: Text(
+                                                    'Cancel',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ProfilePage()));
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
