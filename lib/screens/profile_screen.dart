@@ -1,7 +1,10 @@
 import 'package:approver/screens/login_screen.dart';
 import 'package:approver/services/auth.dart';
+import 'package:approver/services/changepasseord.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -11,11 +14,19 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var oldPass, newPass, rePass;
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  TextEditingController _oldPassController = TextEditingController();
+  TextEditingController _newPassController = TextEditingController();
+  TextEditingController _rePassController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Auth auth = Auth();
     return Container(
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           centerTitle: true,
           title: Text('PROFILE'),
@@ -65,6 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 content: Container(
                                   height: 250,
                                   child: Form(
+                                    key: _formKey,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -97,6 +109,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                               color: Colors.black,
                                             ),
                                           ),
+                                          child: TextFormField(
+                                            controller: _oldPassController,
+                                            keyboardType: TextInputType.text,
+                                            obscureText: true,
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                            ),
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Enter old password',
+                                            ),
+                                            validator: (oldpass) {
+                                              if (oldpass!.isEmpty) {
+                                                return 'Old password is required';
+                                              }
+                                              oldPass = oldpass;
+                                            },
+                                          ),
                                         ),
                                         SizedBox(height: 10),
                                         Row(
@@ -125,6 +155,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                             border: Border.all(
                                               color: Colors.black,
                                             ),
+                                          ),
+                                          child: TextFormField(
+                                            controller: _newPassController,
+                                            keyboardType: TextInputType.text,
+                                            obscureText: true,
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                            ),
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Enter new password',
+                                            ),
+                                            validator: (newpass) {
+                                              if (newpass!.isEmpty) {
+                                                return 'New password is required';
+                                              }
+                                              newPass = newpass;
+                                            },
                                           ),
                                         ),
                                         SizedBox(height: 10),
@@ -155,6 +203,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                               color: Colors.black,
                                             ),
                                           ),
+                                          child: TextFormField(
+                                            controller: _rePassController,
+                                            keyboardType: TextInputType.text,
+                                            obscureText: true,
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                            ),
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Re-enter new password',
+                                            ),
+                                            validator: (repass) {
+                                              if (repass!.isEmpty) {
+                                                return 'New password is required again';
+                                              }
+                                              rePass = repass;
+                                            },
+                                          ),
                                         ),
                                         SizedBox(height: 30),
                                         Row(
@@ -184,7 +250,29 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         fontWeight:
                                                             FontWeight.w400),
                                                   ),
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Map<String, dynamic> creds =
+                                                        Map();
+                                                    creds.putIfAbsent(
+                                                        'old_password',
+                                                        () => _oldPassController
+                                                            .text);
+                                                    creds.putIfAbsent(
+                                                        'new_password',
+                                                        () => _newPassController
+                                                            .text);
+                                                    creds.putIfAbsent(
+                                                        'confirm_password',
+                                                        () => _rePassController
+                                                            .text);
+
+                                                    FormData formData =
+                                                        FormData.fromMap(creds);
+                                                    Provider.of<Auth>(context,
+                                                            listen: false)
+                                                        .changePass(
+                                                            creds: formData);
+                                                  },
                                                 ),
                                               ),
                                             ),
@@ -277,7 +365,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           SizedBox(width: 30),
                           Text(
-                            auth.user.name,
+                            auth.user!.name,
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 16,
@@ -300,7 +388,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           SizedBox(width: 30),
                           Text(
-                            auth.user.email,
+                            auth.user!.email,
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 16,
@@ -332,7 +420,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 20,
                       ),
                       Text(
-                        auth.user.name != null ? auth.user.name : 'guest user',
+                        auth.user!.name != null
+                            ? auth.user!.name
+                            : 'guest user',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,

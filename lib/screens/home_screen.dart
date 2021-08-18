@@ -59,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 20,
                         ),
                         Text(
-                          auth.user.name != null
-                              ? auth.user.name
+                          auth.user!.name != null
+                              ? auth.user!.name
                               : 'guest user',
                           style: TextStyle(
                             color: Colors.white,
