@@ -5,20 +5,20 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Auth extends ChangeNotifier {
   bool _isLoggedIn = false;
-  static late User _user;
+  static User? _user;
   String? _token;
 
   final storage = new FlutterSecureStorage();
 
   bool get authenticated => _isLoggedIn;
-  User get user => _user;
+  User? get user => _user;
   void setCurrentUser(User user) {
     _user = user;
     notifyListeners();
   }
 
   void login({FormData? creds}) async {
-    print(creds);
+    //print(creds);
     String baseUrl = 'http://192.168.1.107/ApprovalAPI/public/index.php/api/v1';
     Dio dio = new Dio();
 
@@ -59,7 +59,7 @@ class Auth extends ChangeNotifier {
         this._token = token;
         this.storeToken(token: token);
         notifyListeners();
-        print(user.name);
+        print(user!.name);
       } catch (e) {
         print(e);
       }
@@ -71,8 +71,39 @@ class Auth extends ChangeNotifier {
     print(_token);
   }
 
-  void logout() {
-    _isLoggedIn = false;
+  void logout() async {
+    Dio dio = new Dio();
+    try {
+      dio.options.headers = {
+        'Authorization': 'Bearer $_token',
+        'Content-Type': 'application/json',
+      };
+      String baseUrl =
+          'http://192.168.1.107/ApprovalAPI/public/index.php/api/v1';
+      Response response = await dio.get(baseUrl + '/logout');
+      cleanUp();
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void cleanUp() async {
+    Auth._user = null;
+    this._isLoggedIn = false;
+    this._token = null;
+    await storage.delete(key: 'token');
+  }
+
+  void changePass({FormData? creds}) async {
+    Dio dio = new Dio();
+    dio.options.headers = {
+      'Authorization': 'Bearer $_token',
+      'Content-Type': 'application/json',
+    };
+    String baseUrl = 'http://192.168.1.107/ApprovalAPI/public/index.php/api/v1';
+
+    var response = await dio.post(baseUrl + '/change-password', data: creds);
     notifyListeners();
   }
 }

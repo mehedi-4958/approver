@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   void readToken() async {
     String? token = await storage.read(key: 'token');
     Provider.of<Auth>(context, listen: false).tryToken(token: token);
-    print(token);
+    //print(token);
   }
 
   @override
@@ -173,7 +173,6 @@ class _LoginPageState extends State<LoginPage> {
                                     return 'Please enter your email';
                                   }
                                   userName = emailValue;
-                                  return null;
                                 },
                               ),
                             ),
@@ -247,7 +246,6 @@ class _LoginPageState extends State<LoginPage> {
                                     return 'Please enter your password';
                                   }
                                   password = passwordValue;
-                                  return null;
                                 },
                               ),
                             ),
