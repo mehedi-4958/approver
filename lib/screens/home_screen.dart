@@ -28,8 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Tab(
                   child: Text('Pending'),
                 ),
-                Tab(icon: Icon(Icons.directions_transit)),
-                Tab(icon: Icon(Icons.directions_bike)),
+                Tab(
+                  child: Text('Approved'),
+                ),
+                Tab(
+                  child: Text('Declined'),
+                ),
               ],
             ),
             title: Text('ITEM LIST'),
