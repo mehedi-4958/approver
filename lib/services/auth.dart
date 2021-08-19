@@ -1,4 +1,5 @@
 import 'package:approver/models/user.dart';
+import 'package:approver/services/itemlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -32,6 +33,7 @@ class Auth extends ChangeNotifier {
       print(responseData);
       print('response print :' + responseData['token']['token'].toString());
       String token = responseData['token']['token'].toString();
+      ItemList().itemList();
       this.tryToken(token: token);
       _isLoggedIn = true;
       notifyListeners();
