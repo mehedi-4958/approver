@@ -1,5 +1,7 @@
+import 'package:approver/models/data.dart';
 import 'package:approver/screens/login_screen.dart';
 import 'package:approver/services/auth.dart';
+import 'package:approver/services/itemlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Auth auth = Auth();
+  ItemList pending = ItemList();
+  late List<ItemDetail> items;
+  var len;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  fetchData() async {
+    ItemList().itemList();
+    items = pending.itemdetail;
+    len = pending.itemdetail.length;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            //toolbarHeight: 100,
+            //toolbarHeight
             bottom: TabBar(
               tabs: [
                 Tab(
@@ -41,7 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: TabBarView(
             children: [
-              Icon(Icons.directions_car),
+              Container(
+                child: ListView.separated(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: 50,
+                        color: Colors.blue[100],
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                    itemCount: len),
+              ),
               Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
             ],
