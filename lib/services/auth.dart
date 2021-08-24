@@ -33,7 +33,7 @@ class Auth extends ChangeNotifier {
       print(responseData);
       print('response print :' + responseData['token']['token'].toString());
       String token = responseData['token']['token'].toString();
-      ItemList().itemList();
+      //ItemList().itemList();
       this.tryToken(token: token);
       _isLoggedIn = true;
       notifyListeners();

@@ -11,13 +11,15 @@ class ItemList extends ChangeNotifier {
   List<DataList> get datalist => _datalist;
   List<ItemDetail> get itemdetail => _itemdetail;
 
-  void setData(DataList dataList) {
-    _datalist = datalist;
+  void setData(List<DataList> data) {
+    _datalist = data;
+
     notifyListeners();
   }
 
-  void setItemDetail(ItemDetail itemDetail) {
-    _itemdetail = itemdetail;
+  void setItemDetail(List<ItemDetail> item) {
+    _itemdetail = item;
+    print('detail1' + itemdetail.toString());
     notifyListeners();
   }
 
@@ -29,16 +31,23 @@ class ItemList extends ChangeNotifier {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    var response = await dio.get(baseUrl + '/item-list');
+    var response = await dio.get(baseUrl + '/pending-item');
     Map<String, dynamic> responseData = response.data;
+    List<DataList> _maindata = [];
+    List<ItemDetail> _data = [];
     print(responseData);
     for (int i = 0; i < response.data['data'].length; i++) {
-      setItemDetail(ItemDetail.fromJson(response.data['data'][i]));
+      _data.add(ItemDetail.fromJson(response.data['data'][i]));
     }
+    setItemDetail(_data);
     // setItemDetail(ItemDetail.fromJson(response.data['data']));
-    setData(DataList.fromJson(response.data));
+    _maindata.add(DataList.fromJson(response.data));
+    setData(_maindata);
+
     //setItemDetail(ItemDetail.fromJson(response.data['data']));
-    print(datalist);
+    print('data' + datalist.toString());
+    print('detail' + itemdetail.toString());
+    print('length: ' + itemdetail.length.toString());
   }
 }
 
